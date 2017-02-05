@@ -13,7 +13,11 @@ endif
 
 function! s:addtimestamp()
     let now = strftime(g:captains_log_date_format)
-    return "\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<End>\<CR>"
+    if getline(".") =~ "^\\s*$"
+        return "\<CR>"
+    else
+        return "\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<End>\<CR>"
+    endif
 endfunction
 
 let s:captains_log_enabled = 1
