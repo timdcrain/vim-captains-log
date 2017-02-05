@@ -20,14 +20,13 @@ function! s:addtimestamp()
     endif
 endfunction
 
-let s:captains_log_enabled = 1
 function! s:toggle()
-    if s:captains_log_enabled
+    if !exists("b:captains_log_enabled") || b:captains_log_enabled
         inoremap <buffer> <expr> <CR> <SID>addtimestamp()
-        let s:captains_log_enabled = 0
+        let b:captains_log_enabled = 0
     else
         iunmap <buffer> <CR>
-        let s:captains_log_enabled = 1
+        let b:captains_log_enabled = 1
     endif
 endfunction
 
