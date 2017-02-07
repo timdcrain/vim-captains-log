@@ -17,7 +17,7 @@ function! s:add_timestamp()
     endif
 
     let now = strftime(g:captains_log_date_format)
-    if getline(".") =~ "^\\s*$"
+    if s:line_is_empty()
         return "\<CR>"
     else
         return "\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<End>\<CR>"
@@ -33,7 +33,7 @@ function! s:block_add_timestamp()
 endfunction
 
 function! s:begin_block()
-    if !exists("b:block_start")
+    if !exists("b:block_start") && !s:line_is_empty()
         let b:block_start = line(".")
     endif
     return "\<CR>"
@@ -41,6 +41,10 @@ endfunction
 
 function! s:in_block()
     return exists("b:block_start")
+endfunction
+
+function! s:line_is_empty()
+    return getline(".") =~ "^\\s*$"
 endfunction
 
 function! s:toggle()
