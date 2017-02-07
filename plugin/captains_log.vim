@@ -27,6 +27,7 @@ endfunction
 function! s:block_add_timestamp()
     let current_line = line(".")
     let timestamp_line = b:block_start
+    unlet b:block_start
     let now = strftime(g:captains_log_date_format)
     return "\<C-O>" . timestamp_line . "G\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<C-O>" . current_line . "G\<End>\<CR>"
 endfunction
