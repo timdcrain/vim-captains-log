@@ -12,14 +12,12 @@ if !exists("g:captains_log_date_format")
 endif
 
 function! s:add_timestamp()
-    if s:in_block()
-        return s:block_add_timestamp()
-    endif
-
-    let now = strftime(g:captains_log_date_format)
     if s:line_is_empty()
         return "\<CR>"
+    elseif s:in_block()
+        return s:block_add_timestamp()
     else
+        let now = strftime(g:captains_log_date_format)
         return "\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<End>\<CR>"
     endif
 endfunction
