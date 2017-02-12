@@ -45,16 +45,26 @@ function! s:line_is_empty()
     return getline(".") =~ "^\\s*$"
 endfunction
 
+function! s:captains_log_enable()
+    inoremap <buffer> <expr> <F2> <SID>begin_block()
+    inoremap <buffer> <expr> <CR> <SID>add_timestamp()
+    let b:captains_log_enabled = 1
+endfunction
+
+function! s:captains_log_disable()
+    iunmap <buffer> <F2>
+    iunmap <buffer> <CR>
+    let b:captains_log_enabled = 0
+endfunction
+
 function! s:toggle()
-    if !exists("b:captains_log_enabled") || b:captains_log_enabled
-        inoremap <buffer> <expr> <F2> <SID>begin_block()
-        inoremap <buffer> <expr> <CR> <SID>add_timestamp()
-        let b:captains_log_enabled = 0
+    if !exists("b:captains_log_enabled") || !b:captains_log_enabled
+        call s:captains_log_enable()
     else
-        iunmap <buffer> <F2>
-        iunmap <buffer> <CR>
-        let b:captains_log_enabled = 1
+        call s:captains_log_disable()
     endif
 endfunction
 
 command! -nargs=0 CaptainsLogToggle call s:toggle()
+command! -nargs=0 CaptainsLogEnable call s:captains_log_enable()
+command! -nargs=0 CaptainsLogDisable call s:captains_log_disable()
