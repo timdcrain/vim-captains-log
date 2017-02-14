@@ -27,7 +27,8 @@ function! s:block_add_timestamp()
     let timestamp_line = b:block_start
     unlet b:block_start
     let now = strftime(g:captains_log_date_format)
-    return "\<C-O>" . timestamp_line . "G\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<C-O>" . current_line . "G\<End>\<CR>"
+    let spaces = substitute(now, ".", " ", "g") . " "
+    return "\<C-O>" . timestamp_line . "G\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<C-O>:" . (timestamp_line + 1) . "," . current_line . "s/^/" . spaces . "\<CR>\<C-O>" . current_line . "G\<End>\<CR>"
 endfunction
 
 function! s:begin_block()
