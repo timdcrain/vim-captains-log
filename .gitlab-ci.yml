@@ -1,0 +1,7 @@
+before_script:
+    - apt-get update -qq && apt-get install -y -qq vim
+    - git clone https://github.com/junegunn/vader.vim.git
+
+plugin:
+    script:
+        - vim -Nu ./test/vimrc -c 'Vader! test/*'

@@ -1,0 +1,27 @@
+Before (Enable plugin):
+  :let g:captains_log_date_format = "<timestamp>"
+  :CaptainsLogEnable
+
+Given (An empty buffer):
+
+# getline doesn't work with current edits in Vader,
+# so we have to Esc first before hitting Enter.
+Do (Enter single line log):
+  iFirst line\<Esc>a\<Enter>
+  Second line
+
+Expect (Timestamp in front of line):
+  <timestamp> First line
+  Second line
+
+Do (Enter multi-line log):
+  iFirst line\<Esc>a\<F2>
+  Second line\<Esc>a\<F2>
+  Third line\<Esc>a\<Enter>
+  Fourth line
+
+Expect (Timestamp in front of first line):
+  <timestamp> First line
+              Second line
+              Third line
+  Fourth line
