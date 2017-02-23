@@ -6,10 +6,6 @@ if exists("g:loaded_captains_log") || &cp
 endif
 let g:loaded_captains_log = 1
 
-if !exists("g:captains_log_date_format")
-    let g:captains_log_date_format = "%FT%T%z"
-endif
-
 function! s:captains_log_enable()
     inoremap <buffer> <F2> <C-O>:call captains_log#begin_block()<CR>
     inoremap <buffer> <CR> <C-O>:call captains_log#add_timestamp()<CR>
