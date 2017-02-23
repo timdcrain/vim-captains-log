@@ -12,34 +12,52 @@ if !exists("g:captains_log_date_format")
 endif
 
 function! s:add_timestamp()
-    if s:line_is_empty()
-        return "\<CR>"
-    elseif s:in_block()
-        return s:block_add_timestamp()
-    else
-        let now = strftime(g:captains_log_date_format)
-        return "\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<End>\<CR>"
+    if !s:line_is_empty()
+        if s:in_block()
+            call s:block_add_timestamp()
+        else
+            let now = strftime(g:captains_log_date_format) . " "
+            call s:prepend(".", now)
+        endif
     endif
+
+    call s:newline()
 endfunction
 
 function! s:block_add_timestamp()
     let current_line = line(".")
-    let timestamp_line = b:block_start
+    let now = strftime(g:captains_log_date_format) . " "
+    call s:prepend(b:block_start, now)
+
+    let spaces = substitute(now, ".", " ", "g")
+    let lnum = b:block_start + 1
+    while lnum <= current_line
+        call s:prepend(lnum, spaces)
+        let lnum = lnum + 1
+    endwhile
+
     unlet b:block_start
-    let now = strftime(g:captains_log_date_format)
-    let spaces = substitute(now, ".", " ", "g") . " "
-    return "\<C-O>" . timestamp_line . "G\<Home>\<C-R>=\"" . now . "\"\<CR>\<Space>\<C-O>:" . (timestamp_line + 1) . "," . current_line . "s/^/" . spaces . "\<CR>\<C-O>" . current_line . "G\<End>\<CR>"
 endfunction
 
 function! s:begin_block()
     if !exists("b:block_start") && !s:line_is_empty()
         let b:block_start = line(".")
     endif
-    return "\<CR>"
+    call s:newline()
 endfunction
 
 function! s:in_block()
     return exists("b:block_start")
+endfunction
+
+function! s:prepend(lnum, text)
+    call setline(a:lnum, a:text . getline(a:lnum))
+endfunction
+
+function! s:newline()
+    let current_line = line(".")
+    call append(current_line, "")
+    call cursor(current_line + 1, 1)
 endfunction
 
 function! s:line_is_empty()
@@ -47,8 +65,8 @@ function! s:line_is_empty()
 endfunction
 
 function! s:captains_log_enable()
-    inoremap <buffer> <expr> <F2> <SID>begin_block()
-    inoremap <buffer> <expr> <CR> <SID>add_timestamp()
+    inoremap <buffer> <F2> <C-O>:call <SID>begin_block()<CR>
+    inoremap <buffer> <CR> <C-O>:call <SID>add_timestamp()<CR>
     let b:captains_log_enabled = 1
 endfunction
 
