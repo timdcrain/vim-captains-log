@@ -1,6 +1,9 @@
 Before (Enable plugin):
   :let g:captains_log_date_format = "<timestamp>"
   :CaptainsLogEnable
+  " Temporarily disabling block timestamps until
+  " I figure out a better method of entering them.
+  :inoremap <buffer> <F2> <C-O>:call captains_log#begin_block()<CR>
 
 Given (An empty buffer):
 
