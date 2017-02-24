@@ -3,7 +3,7 @@ Captain's Log [![build status](https://gitlab.com/timdcrain/vim-captains-log/bad
 
 Captain's Log is a personal log entry plugin.
 
-[Example usage](https://gitlab.com/timdcrain/vim-captains-log.wiki/images/example.gif)
+![Example usage](https://gitlab.com/timdcrain/vim-captains-log.wiki/raw/master/images/example.gif)
 
 Basic Usage
 ===========
