@@ -1,0 +1,32 @@
+*captains-log.txt* Your own personal log
+*captains-log*
+
+==============================================================================
+CONTENTS                                               *captains-log-contents*
+
+    1. Intro ........................................ |captains-log-intro|
+    2. Configuration ........................ |captains-log-configuration|
+    3. Mappings .................................. |captains-log-mappings|
+    X. License .................................... |captains-log-license|
+
+==============================================================================
+1. Intro                                                  *captains-log-intro*
+
+TODO: Add intro section.
+
+==============================================================================
+2. Configuration                                  *captains-log-configuration*
+
+TODO: Add configuration section.
+
+==============================================================================
+3. Mappings                                            *captains-log-mappings*
+
+TODO: Add mappings section.
+
+==============================================================================
+X. License                                              *captains-log-license*
+
+TODO: Add license section.
+
+vim:tw=78:sw=4:norl:
