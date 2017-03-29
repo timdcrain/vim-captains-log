@@ -1,5 +1,7 @@
-*captains-log.txt* Your own personal log
+*captains-log.txt*	For Vim version 8.0	Last change: 2017 March 28
 *captains-log*
+
+Your own personal log
 
 ==============================================================================
 CONTENTS                                               *captains-log-contents*
@@ -7,26 +9,61 @@ CONTENTS                                               *captains-log-contents*
     1. Intro ........................................ |captains-log-intro|
     2. Configuration ........................ |captains-log-configuration|
     3. Mappings .................................. |captains-log-mappings|
-    X. License .................................... |captains-log-license|
+    4. Commands .................................. |captains-log-commands|
+    5. Changelog ................................ |captains-log-changelog|
+    6. Contributing .......................... |captains-log-contributing|
+    7. License .................................... |captains-log-license|
 
 ==============================================================================
 1. Intro                                                  *captains-log-intro*
 
-TODO: Add intro section.
+Captain's Log is a plugin for recording timestamps associated with important
+events.
+
+Once the plugin is enabled, pressing enter will record the timestamp at the
+beginning of the line.
 
 ==============================================================================
 2. Configuration                                  *captains-log-configuration*
 
-TODO: Add configuration section.
+g:captains_log_date_format                        *g:captains_log_date_format*
+
+    Type: String
+    Default: "%FT%T%z"
+
+    The format of the timestamp prepended to the line. See `:help strftime`
+    for more information on the format string.
 
 ==============================================================================
 3. Mappings                                            *captains-log-mappings*
 
-TODO: Add mappings section.
+<Enter> or <Plug>CaptainslogRecord
+
+    Prepends the line with the current timestamp.
 
 ==============================================================================
-X. License                                              *captains-log-license*
+4. Commands                                            *captains-log-commands*
 
-TODO: Add license section.
+:CaptainsLogEnable                                        *:CaptainsLogEnable*
 
-vim:tw=78:sw=4:norl:
+    Enable the plugin in the current buffer. Doing this will rebind <Enter>.
+
+:CaptainsLogDisable                                      *:CaptainsLogDisable*
+
+    Disable the plugin in the current buffer. This will unbind <Enter>.
+
+==============================================================================
+6. Contributing                                    *captains-log-contributing*
+
+All contributions are welcome.
+
+Issues can be filed at https://gitlab.com/timdcrain/vim-captains-log/issues.
+
+Development is happening at https://gitlab.com/timdcrain/vim-captains-log.
+
+==============================================================================
+7. License                                              *captains-log-license*
+
+MIT License. Copyright 2017 Tim Crain.
+
+ vim:tw=78:sw=4:ft=helpnorl:
