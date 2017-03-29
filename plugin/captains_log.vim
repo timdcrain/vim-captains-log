@@ -1,13 +1,14 @@
 " captains-log.vim - Your own personal log
-" Maintainer:   Timothy Crain
 
 if exists("g:loaded_captains_log") || &cp
     finish
 endif
 let g:loaded_captains_log = 1
 
+inoremap <silent> <Plug>(CaptainslogRecord) <C-O>:call captains_log#add_timestamp()<CR>
+
 function! s:captains_log_enable()
-    inoremap <buffer> <CR> <C-O>:call captains_log#add_timestamp()<CR>
+    imap <buffer> <CR> <Plug>(CaptainslogRecord)
 endfunction
 
 function! s:captains_log_disable()
