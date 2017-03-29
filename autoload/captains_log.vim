@@ -1,5 +1,4 @@
 " captains-log.vim - Your own personal log
-" Maintainer:   Timothy Crain
 
 if exists("g:loaded_captains_log_auto") || &cp
     finish
@@ -15,8 +14,8 @@ function! captains_log#add_timestamp()
         if s:in_block()
             call s:block_add_timestamp()
         else
-            let now = strftime(g:captains_log_date_format) . " "
-            call s:prepend(".", now)
+            let prefix = strftime(g:captains_log_date_format) . " "
+            call s:prepend(".", prefix)
         endif
     endif
 
@@ -32,10 +31,10 @@ endfunction
 
 function! s:block_add_timestamp()
     let current_line = line(".")
-    let now = strftime(g:captains_log_date_format) . " "
-    call s:prepend(b:block_start, now)
+    let prefix = strftime(g:captains_log_date_format) . " "
+    call s:prepend(b:block_start, prefix)
 
-    let spaces = substitute(now, ".", " ", "g")
+    let spaces = repeat(' ', strwidth(prefix))
     let lnum = b:block_start + 1
     while lnum <= current_line
         call s:prepend(lnum, spaces)
